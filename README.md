@@ -17,7 +17,6 @@ npm run build
 ```
 
 ## Usage
-
 ```
 // Require
 var sf = require('simple-fetch')
