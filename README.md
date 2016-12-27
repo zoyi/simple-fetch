@@ -23,19 +23,32 @@ var sf = require('simple-fetch')
 
 // Create instance
 var client = new sf.Client()
+```
 
+## Features
+
+### Set base url depending on NODE_ENV
+```
 // Set base url
-client.setBaseUrl({
-    staging: 'http://api.dev.example.com',
-    production: 'http://api.example.com'
-})
+client.setBaseUrl('http://base.url')
 
-// Set default header
+// Set base url depending on NODE_ENV
+client.setBaseUrl({
+    staging: 'http://dev.base.url',  // if NODE_ENV is 'staging'
+    production: 'http://base.url'    // if NODE_ENV is 'production'
+})
+```
+
+### Set default header which is applied to every request
+```
 client.setDefaultHeader({
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 })
+```
 
+### REST methods (to be continued...)
+```
 // GET (query is default)
 const query = { key: 'value' }
 client.get('url', query)

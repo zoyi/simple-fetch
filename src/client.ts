@@ -4,13 +4,18 @@ const fetch = require('isomorphic-fetch');
 
 export default class Client {
     defaultHeader: { [key: string]: string };
+    baseUrl: string;
 
     constructor() {
 
     }
 
-    setBaseUrl() {
-
+    setBaseUrl(baseUrl: string | any) {
+        if (typeof baseUrl === 'string') {
+            this.baseUrl = baseUrl;
+        } else {
+            this.baseUrl = baseUrl[process.env.NODE_ENV]
+        }
     }
 
     setDefaultHeader(header: { [key: string]: string }) {
@@ -26,7 +31,7 @@ export default class Client {
     /**
      * Base fetch method with default tasks (check status, parse json)
      */
-    private fetch(...args: any[]) {
+    fetch(...args: any[]) {
         return fetch(...args).then(Client.checkStatus)
     }
 
@@ -43,7 +48,7 @@ export default class Client {
         if (response.status >= 200 && response.status < 300) {
             return response.text().then(parseJSON)
         }
-        
+
         return response.text().then(parseJSON).then((json: JSON) => {
             const error: Error = {
                 status: response.status,

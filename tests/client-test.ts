@@ -6,6 +6,22 @@ const nock = require('nock');
 
 describe('Client', () => {
     const client = new Client();
+    describe('setBaseUrl method', () => {
+        it('should set base url if argument is string', () => {
+            client.setBaseUrl('http://base.url');
+            expect(client.baseUrl).to.eq('http://base.url');
+        });
+
+        it('should set base url depending on NODE_ENV value if argument is object', () => {
+            process.env.NODE_ENV = 'production';
+            client.setBaseUrl({
+                staging: 'http://dev.base.url',
+                production: 'http://base.url',
+            });
+            expect(client.baseUrl).to.eq('http://base.url');
+        });
+    });    
+
     describe('fetch method', () => {
         it('should parse json if status is ok', (done) => {
             const responseBody = { key: 'value' };
