@@ -1,3 +1,5 @@
-export default class Sample {
-  
+import Client from './client'
+
+export default {
+    Client
 }
