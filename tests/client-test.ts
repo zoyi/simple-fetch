@@ -6,6 +6,14 @@ const nock = require('nock');
 
 describe('Client', () => {
     const client = new Client();
+
+    it('should onstruct with default headers', () => {
+        expect(client.defaultHeader).to.deep.eq({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        });
+    })
+
     describe('setBaseUrl method', () => {
         it('should set base url if argument is string', () => {
             client.setBaseUrl('http://base.url');
