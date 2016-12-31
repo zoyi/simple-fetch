@@ -33,13 +33,20 @@ export default class Client {
         return this.fetch(`${this.baseUrl}${url}`)
     }
 
+    post(url: String, body?: Object) {
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'post',
+            body: JSON.stringify(body),
+        })
+    }
+
     /**
      * Base fetch method with default tasks (check status, parse json)
      */
-    fetch(url: string, ...args: any[]) {
+    fetch(url: string, options?: Object) {
         return fetch(url, {
             headers: this.defaultHeader,
-            ...args
+            ...options
         }).then(Client.checkStatus)
     }
 
