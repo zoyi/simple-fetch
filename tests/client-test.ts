@@ -124,4 +124,17 @@ describe('Client', () => {
             });
         });
     });
+
+    describe('delete method', () => {
+        it('should request DELETE method to url', (done) => {
+            nock('http://example.com').delete('/test').reply(200);
+            client.setBaseUrl('http://example.com')
+            client.delete('/test').then((res: JSON) => {
+                expect(res).to.deep.eq('');
+                done();
+            }).catch((err: JSON) => {
+                done(err);
+            });
+        });
+    });
 });

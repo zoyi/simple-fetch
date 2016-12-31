@@ -47,6 +47,12 @@ export default class Client {
         })
     }
 
+    delete(url: String) {
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'delete',
+        })
+    }
+
     /**
      * Base fetch method with default tasks (check status, parse json)
      */

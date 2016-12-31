@@ -59,7 +59,7 @@ client.post('url', body)
 client.put('url', body)
 
 // DELETE
-client.destroy('url')
+client.delete('url')
 ```
 
 ## To Do
