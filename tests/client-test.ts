@@ -45,4 +45,29 @@ describe('Client', () => {
             });
         });
     });
+
+    describe('get method', () => {
+        it('should request GET method to url', (done) => {
+            const responseBody = { key: 'value' };
+            nock('http://example.com').get('/test').reply(200, responseBody);
+            client.setBaseUrl('http://example.com')
+            client.get('/test').then((res: JSON) => {
+                expect(res).to.deep.eq(responseBody);
+                done();
+            }).catch((err: JSON) => {
+                done(err);
+            });
+        });
+        it('should request GET method to url with encoding query object', (done) => {
+            const responseBody = { key: 'value' };
+            nock('http://example.com').get('/test?a=b').reply(200, responseBody);
+            client.setBaseUrl('http://example.com')
+            client.get('/test', { a: 'b' }).then((res: JSON) => {
+                expect(res).to.deep.eq(responseBody);
+                done();
+            }).catch((err: JSON) => {
+                done(err);
+            });
+        });
+    });
 });

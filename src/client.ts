@@ -1,6 +1,7 @@
 import Error from './interfaces/error';
 
 const fetch = require('isomorphic-fetch');
+const Qs = require('qs');
 
 export default class Client {
     defaultHeader: { [key: string]: string };
@@ -26,7 +27,10 @@ export default class Client {
     }
 
     get(url: string, query?: Object) {
-        return this.fetch(url)
+        if (query) {
+            return this.fetch(`${this.baseUrl}${url}?${Qs.stringify(query)}`)
+        }
+        return this.fetch(`${this.baseUrl}${url}`)
     }
 
     /**
