@@ -47,23 +47,47 @@ client.setDefaultHeader({
 })
 ```
 
-### REST methods (to be continued...)
+### Encode query string on GET method
 ```
-// GET (query is default)
 const query = { key: 'value' }
 client.get('url', query)
+```
 
-// POST, PUT (json encoding is default)
+### Encode request body to json on POST, PUT method
+```
 const body = { key: 'value' }
 client.post('url', body)
 client.put('url', body)
+```
 
-// DELETE
+### No encode on DELETE method
+```
 client.delete('url')
+```
+
+### Decode response body to json
+```
+client.get('url').then((body: JSON) => {
+    console.log(body)
+})
+```
+
+### Reject if status code is not 2XX
+```
+client.get('url').then(() => {}).catch((err: Error) => {
+    console.error(err)
+})
+
+// Error type is below.
+interface Error {
+    status: string;     // status code
+    statusText: string; // status text
+    body: JSON;         // json decoded response body
+}
 ```
 
 ## To Do
 
-- Support POST, PUT with form url encoded
-- Support POST, PUT with form data
-- Support dynamic header
+- Support various parameter encoding (form, url-encoded)
+- Abstract file upload and Support uploading progress
+- Support dynamic header (or custom header)
