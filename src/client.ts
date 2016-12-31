@@ -7,7 +7,10 @@ export default class Client {
     baseUrl: string;
 
     constructor() {
-
+        this.defaultHeader = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
     }
 
     setBaseUrl(baseUrl: string | any) {
@@ -23,16 +26,17 @@ export default class Client {
     }
 
     get(url: string, query?: Object) {
-        return this.fetch(url, {
-            headers: this.defaultHeader
-        })
+        return this.fetch(url)
     }
 
     /**
      * Base fetch method with default tasks (check status, parse json)
      */
-    fetch(...args: any[]) {
-        return fetch(...args).then(Client.checkStatus)
+    fetch(url: string, ...args: any[]) {
+        return fetch(url, {
+            headers: this.defaultHeader,
+            ...args
+        }).then(Client.checkStatus)
     }
 
     /**

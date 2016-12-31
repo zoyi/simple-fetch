@@ -20,7 +20,7 @@ describe('Client', () => {
             });
             expect(client.baseUrl).to.eq('http://base.url');
         });
-    });    
+    });
 
     describe('fetch method', () => {
         it('should parse json if status is ok', (done) => {
@@ -35,7 +35,7 @@ describe('Client', () => {
         });
         it('should throw error if status is not ok', (done) => {
             const responseBody = { error: 'This is error' }
-            nock('http://example.com').get('/test').reply(400, responseBody);        
+            nock('http://example.com').get('/test').reply(400, responseBody);
             client.fetch('http://example.com/test').then((res: JSON) => {
                 done(true);
             }).catch((err: Error) => {
@@ -44,5 +44,5 @@ describe('Client', () => {
                 done();
             });
         });
-    });    
+    });
 });
