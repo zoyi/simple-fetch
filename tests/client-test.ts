@@ -7,12 +7,21 @@ const nock = require('nock');
 describe('Client', () => {
     const client = new Client();
 
-    it('should onstruct with default headers', () => {
+    it('should construct with default headers', () => {
         expect(client.defaultHeader).to.deep.eq({
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         });
-    })
+    });
+
+    it('setDefaultHeader method should change default headers', () => {
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        };
+        client.setDefaultHeader(headers);
+        expect(client.defaultHeader).to.deep.eq(headers);
+    });
 
     describe('setBaseUrl method', () => {
         it('should set base url if argument is string', () => {
