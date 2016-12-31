@@ -40,6 +40,13 @@ export default class Client {
         })
     }
 
+    put(url: String, body?: Object) {
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'put',
+            body: JSON.stringify(body),
+        })
+    }
+
     /**
      * Base fetch method with default tasks (check status, parse json)
      */

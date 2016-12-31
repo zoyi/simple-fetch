@@ -97,4 +97,31 @@ describe('Client', () => {
             });
         });
     });
+
+    describe('put method', () => {
+        it('should request PUT method to url', (done) => {
+            const responseBody = { key: 'value' };
+            nock('http://example.com').put('/test').reply(200, responseBody);
+            client.setBaseUrl('http://example.com')
+            client.put('/test').then((res: JSON) => {
+                expect(res).to.deep.eq(responseBody);
+                done();
+            }).catch((err: JSON) => {
+                done(err);
+            });
+        });
+
+        it('should request PUT method to url with encoding body json', (done) => {
+            const requestBody = { email: 'sean@zoyi.co' };
+            const responseBody = { name: 'sean' };
+            nock('http://example.com').put('/test', requestBody).reply(200, responseBody);
+            client.setBaseUrl('http://example.com')
+            client.put('/test', requestBody).then((res: JSON) => {
+                expect(res).to.deep.eq(responseBody);
+                done();
+            }).catch((err: JSON) => {
+                done(err);
+            });
+        });
+    });
 });
