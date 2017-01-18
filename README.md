@@ -47,6 +47,27 @@ client.setDefaultHeader({
 })
 ```
 
+### Set header interceptor (filter) for dynamic header
+```
+client.setHeaderInterceptor((header) => {
+    // header is defaultHeader
+    header['X-Auth-Token'] = 'ABCD'
+    return header
+})
+```
+
+### Set credential options
+```
+// default value is '' (means no use)
+client.credentials = ''
+
+// Use cookies for same origin
+client.credentials = 'same-origin'
+
+// For CORS
+client.credentials = 'include'
+```
+
 ### Encode query string on GET method
 ```
 const query = { key: 'value' }
@@ -90,4 +111,3 @@ interface Error {
 
 - Support various parameter encoding (form, url-encoded)
 - Abstract file upload and Support uploading progress
-- Support dynamic header (or custom header)

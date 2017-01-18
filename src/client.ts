@@ -3,28 +3,48 @@ import Error from './interfaces/error';
 const fetch = require('isomorphic-fetch');
 const Qs = require('qs');
 
+export type Header = { [key: string]: string };
+export type Credentials = '' | 'same-origin' | 'include';
+
 export default class Client {
-    defaultHeader: { [key: string]: string };
+
+    // Properties
+
     baseUrl: string;
+    defaultHeader: Header;
+    credentials: Credentials = '';
+    headerInterceptor: (header: Header) => Header = (header) => {
+        return header
+    }
+
+    // Constructors
 
     constructor() {
         this.defaultHeader = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-        }
+        };
     }
+
+    // Option-related methods
 
     setBaseUrl(baseUrl: string | any) {
         if (typeof baseUrl === 'string') {
             this.baseUrl = baseUrl;
         } else {
-            this.baseUrl = baseUrl[process.env.NODE_ENV]
+            this.baseUrl = baseUrl[process.env.NODE_ENV];
         }
     }
 
-    setDefaultHeader(header: { [key: string]: string }) {
-        this.defaultHeader = header
+    setDefaultHeader(header: Header) {
+        this.defaultHeader = header;
     }
+
+    setHeaderInterceptor(interceptor: (header: Header) => Header) {
+        this.headerInterceptor = interceptor;
+    }
+
+    // REST methods
 
     get(url: string, query?: Object) {
         if (query) {
@@ -58,7 +78,8 @@ export default class Client {
      */
     fetch(url: string, options?: Object) {
         return fetch(url, {
-            headers: this.defaultHeader,
+            headers: this.getHeader(),
+            credentials: this.credentials,
             ...options
         }).then(Client.checkStatus)
     }
@@ -85,5 +106,11 @@ export default class Client {
             }
             throw error
         })
+    }
+
+    // Private helper methods
+
+    private getHeader() {
+        return this.headerInterceptor(this.defaultHeader);
     }
 }

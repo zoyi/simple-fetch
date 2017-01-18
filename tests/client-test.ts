@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Client from '../src/client';
+import Client, { Header } from '../src/client';
 import Error from '../src/interfaces/error';
 
 const nock = require('nock');
@@ -21,6 +21,36 @@ describe('Client', () => {
         };
         client.setDefaultHeader(headers);
         expect(client.defaultHeader).to.deep.eq(headers);
+    });
+
+    it('setHeaderInterceptor method should dynamically change default headers', (done) => {
+        client.setBaseUrl('http://example.com');
+        client.setDefaultHeader({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        });
+        client.setHeaderInterceptor((header: Header) => {
+            header['X-Auth-Token'] = 'authToken';
+            return header;
+        });
+
+        nock('http://example.com', {
+            reqheaders: {
+                'X-Auth-Token': (headerValue: any) => {
+                    if (headerValue) {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }).get('/test').reply(200, {});
+
+        client.get('/test').then((res: JSON) => {
+            expect(res).to.deep.eq({});
+            done();
+        }).catch((err: JSON) => {
+            done(err);
+        });
     });
 
     describe('setBaseUrl method', () => {
