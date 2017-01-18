@@ -1,5 +1,5 @@
 {
-  "name": "simple-fetch",
+  "name": "zoyi-simple-fetch",
   "version": "0.1.0",
   "scripts": {
     "test": "mocha --opts tests/mocha.opts tests/**/*-test.ts",
