@@ -1,6 +1,6 @@
 {
-  "name": "typescript-npm-boilerplate",
-  "version": "1.0.0",
+  "name": "simple-fetch",
+  "version": "0.1.0",
   "scripts": {
     "test": "mocha --opts tests/mocha.opts tests/**/*-test.ts",
     "build": "rm -rf lib && tsc -p . && rm -fr lib/tests && mv lib/src/** lib/ && rm -fr lib/src",
