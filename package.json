@@ -5,7 +5,8 @@
     "test": "mocha --opts tests/mocha.opts tests/**/*-test.ts",
     "build:ts": "rm -rf lib-ts && tsc -p . && rm -fr lib-ts/tests && mv lib-ts/src/** lib-ts/ && rm -fr lib-ts/src",
     "build:babel": "rm -rf lib && babel lib-ts -d lib --sourceMaps 'both'",
-    "prepublish": "npm run build:ts && npm run build:babel"
+    "build": "npm run build:ts && npm run build:babel",
+    "prepublish": "npm run build"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
