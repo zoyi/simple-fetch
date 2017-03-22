@@ -17,7 +17,6 @@
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/form-data": "0.0.33",
-    "@types/isomorphic-fetch": "0.0.31",
     "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.42",
     "@types/qs": "^6.2.30",
