@@ -3,3 +3,4 @@ lib
 lib-ts
 typings
 npm-debug.log
+.DS_Store
