@@ -3,6 +3,7 @@ import Client, { Header } from '../src/client';
 import Error from '../src/interfaces/error';
 
 const nock = require('nock');
+const FormData = require('form-data');
 
 describe('Client', () => {
     const client = new Client();
@@ -143,6 +144,21 @@ describe('Client', () => {
                 done(err);
             });
         });
+
+        // TODO: Enhance test case
+        it('should request POST method to url with encoding form data', (done) => {
+            const responseBody = { message: 'success' };
+            nock('http://example.com').post('/test').reply(200, responseBody);
+            client.setBaseUrl('http://example.com');
+            const formData = new FormData();
+            formData.append('key', 'value');
+            client.post('/test', formData).then((res: JSON) => {
+                expect(res).to.deep.eq(responseBody);
+                done();
+            }).catch((err: JSON) => {
+                done(err);
+            });
+        })
     });
 
     describe('put method', () => {
@@ -170,6 +186,21 @@ describe('Client', () => {
                 done(err);
             });
         });
+
+        // TODO: Enhance test case
+        it('should request PUT method to url with encoding form data', (done) => {
+            const responseBody = { message: 'success' };
+            nock('http://example.com').put('/test').reply(200, responseBody);
+            client.setBaseUrl('http://example.com');
+            const formData = new FormData();
+            formData.append('key', 'value');
+            client.put('/test', formData).then((res: JSON) => {
+                expect(res).to.deep.eq(responseBody);
+                done();
+            }).catch((err: JSON) => {
+                done(err);
+            });
+        })
     });
 
     describe('delete method', () => {

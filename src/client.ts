@@ -2,6 +2,7 @@ import Error from './interfaces/error';
 
 const fetch = require('isomorphic-fetch');
 const Qs = require('qs');
+const FormData = require('form-data');
 
 export type Header = { [key: string]: string };
 export type Credentials = '' | 'same-origin' | 'include';
@@ -53,7 +54,16 @@ export default class Client {
         return this.fetch(`${this.baseUrl}${url}`)
     }
 
-    post(url: String, body?: Object) {
+    post(url: String, body?: Object | FormData) {
+        if (body instanceof FormData) {
+            return this.fetch(`${this.baseUrl}${url}`, {
+                method: 'post',
+                body: body,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        }
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'post',
             body: JSON.stringify(body),
@@ -61,6 +71,15 @@ export default class Client {
     }
 
     put(url: String, body?: Object) {
+        if (body instanceof FormData) {
+            return this.fetch(`${this.baseUrl}${url}`, {
+                method: 'put',
+                body: body,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        }
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'put',
             body: JSON.stringify(body),
