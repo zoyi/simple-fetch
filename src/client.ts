@@ -59,9 +59,7 @@ export default class Client {
             return this.fetch(`${this.baseUrl}${url}`, {
                 method: 'post',
                 body: body,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                headers: this.headerInterceptor({})
             })
         }
         return this.fetch(`${this.baseUrl}${url}`, {
@@ -75,9 +73,7 @@ export default class Client {
             return this.fetch(`${this.baseUrl}${url}`, {
                 method: 'put',
                 body: body,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+                headers: this.headerInterceptor({})
             })
         }
         return this.fetch(`${this.baseUrl}${url}`, {
