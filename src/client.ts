@@ -55,31 +55,33 @@ export default class Client {
         return this.fetch(`${this.baseUrl}${url}`)
     }
 
-    post(url: String, body?: Object | FormData) {
-        if (!isObjectLike(body)) {
-            return this.fetch(`${this.baseUrl}${url}`, {
-                method: 'post',
-                body: body,
-                headers: this.headerInterceptor({})
-            })
-        }
+    post(url: String, body?: Object) {
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'post',
             body: JSON.stringify(body),
         })
     }
 
+    postByForm(url: String, body: FormData) {
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'post',
+            body: body,
+            headers: this.headerInterceptor({})
+        })
+    }
+
     put(url: String, body?: Object) {
-        if (!isObjectLike(body)) {
-            return this.fetch(`${this.baseUrl}${url}`, {
-                method: 'put',
-                body: body,
-                headers: this.headerInterceptor({})
-            })
-        }
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'put',
             body: JSON.stringify(body),
+        })
+    }
+
+    putByForm(url: String, body: FormData) {
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'put',
+            body: body,
+            headers: this.headerInterceptor({})
         })
     }
 

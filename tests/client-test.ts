@@ -152,7 +152,7 @@ describe('Client', () => {
             client.setBaseUrl('http://example.com');
             const formData = new FormData();
             formData.append('key', 'value');
-            client.post('/test', formData).then((res: JSON) => {
+            client.postByForm('/test', formData).then((res: JSON) => {
                 expect(res).to.deep.eq(responseBody);
                 done();
             }).catch((err: JSON) => {
@@ -194,7 +194,7 @@ describe('Client', () => {
             client.setBaseUrl('http://example.com');
             const formData = new FormData();
             formData.append('key', 'value');
-            client.put('/test', formData).then((res: JSON) => {
+            client.putByForm('/test', formData).then((res: JSON) => {
                 expect(res).to.deep.eq(responseBody);
                 done();
             }).catch((err: JSON) => {
