@@ -2,6 +2,7 @@ import Error from './interfaces/error';
 
 const fetch = require('isomorphic-fetch');
 const Qs = require('qs');
+var isObject = require('lodash.isobject');
 const { FormData } = require('form-data');
 
 export type Header = { [key: string]: string };
@@ -55,7 +56,7 @@ export default class Client {
     }
 
     post(url: String, body?: Object | FormData) {
-        if (body instanceof FormData) {
+        if (!isObject(body)) {
             return this.fetch(`${this.baseUrl}${url}`, {
                 method: 'post',
                 body: body,
@@ -69,7 +70,7 @@ export default class Client {
     }
 
     put(url: String, body?: Object) {
-        if (body instanceof FormData) {
+        if (!isObject(body)) {
             return this.fetch(`${this.baseUrl}${url}`, {
                 method: 'put',
                 body: body,
