@@ -1,4 +1,4 @@
 {
   "presets": ["latest"],
-  "plugins": ["remove-comments"]
+  "plugins": ["remove-comments", "transform-object-assign"]
 }
