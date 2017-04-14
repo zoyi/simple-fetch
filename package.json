@@ -16,10 +16,10 @@
   ],
   "devDependencies": {
     "@types/chai": "^3.4.34",
-    "@types/form-data": "0.0.33",
     "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.42",
     "@types/qs": "^6.2.30",
+    "@types/whatwg-fetch": "0.0.33",
     "babel-cli": "^6.18.0",
     "babel-plugin-remove-comments": "^2.0.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
@@ -32,9 +32,7 @@
     "typescript": "^2.0.3"
   },
   "dependencies": {
-    "form-data": "^2.1.2",
-    "isomorphic-fetch": "^2.2.1",
-    "lodash.isobjectlike": "^4.0.0",
-    "qs": "^6.3.0"
+    "qs": "^6.3.0",
+    "whatwg-fetch": "^2.0.3"
   }
 }

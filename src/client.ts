@@ -1,9 +1,8 @@
+import 'whatwg-fetch';
+
 import Error from './interfaces/error';
 
-const fetch = require('isomorphic-fetch');
 const Qs = require('qs');
-var isObjectLike = require('lodash.isobjectlike');
-const { FormData } = require('form-data');
 
 export type Header = { [key: string]: string };
 export type Credentials = '' | 'same-origin' | 'include';
@@ -62,7 +61,8 @@ export default class Client {
         })
     }
 
-    postByForm(url: String, body: FormData) {
+    postByForm(url: String, body: any) {
+        // TODO: check type of body
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'post',
             body: body,
@@ -77,7 +77,8 @@ export default class Client {
         })
     }
 
-    putByForm(url: String, body: FormData) {
+    putByForm(url: String, body: any) {
+        // TODO: check type of body
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'put',
             body: body,
