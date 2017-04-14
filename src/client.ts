@@ -85,6 +85,14 @@ export default class Client {
         })
     }
 
+    putByUrlEncoding(url: String, body?: Object) {
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'put',
+            body: Qs.stringify(body, { arrayFormat: 'repeat' }),
+            headers: this.getHeaderUrlEncodedContentType()
+        })
+    }
+
     delete(url: String) {
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'delete',
@@ -130,5 +138,12 @@ export default class Client {
 
     private getHeader() {
         return this.headerInterceptor(this.defaultHeader);
+    }
+
+    private getHeaderUrlEncodedContentType() {
+        return this.headerInterceptor({
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        })
     }
 }

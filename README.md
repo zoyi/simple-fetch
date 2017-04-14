@@ -81,6 +81,12 @@ client.post('url', body)
 client.put('url', body)
 ```
 
+### Encode request body to url encoded form on PUT method
+```
+const body = { key: 'value' }
+client.putByUrlEncoding('url', body)
+```
+
 ### No encode on DELETE method
 ```
 client.delete('url')
