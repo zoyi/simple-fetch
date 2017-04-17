@@ -70,6 +70,14 @@ export default class Client {
         })
     }
 
+    postByUrlEncoding(url: String, body?: Object) {
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'post',
+            body: Qs.stringify(body, { arrayFormat: 'repeat' }),
+            headers: this.getHeaderUrlEncodedContentType()
+        })
+    }
+
     put(url: String, body?: Object) {
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'put',

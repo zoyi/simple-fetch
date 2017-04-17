@@ -149,6 +149,11 @@ describe.skip('Client', () => {
         it('should request POST method to url with encoding form data', (done) => {
             done();
         })
+
+        // TODO: Add test case
+        it('should request POST method to url with url-encoded form', (done) => {
+            done();
+        })
     });
 
     describe('put method', () => {

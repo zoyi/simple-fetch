@@ -3,7 +3,7 @@ Simple, easy to use fetch wrapping module
 
 ## Installation
 ```
-npm install simple-fetch
+npm install zoyi-simple-fetch
 ```
 
 ## Testing
@@ -19,7 +19,7 @@ npm run build
 ## Usage
 ```
 // Require
-var sf = require('simple-fetch')
+var sf = require('zoyi-simple-fetch')
 
 // Create instance
 var client = new sf.Client()
@@ -81,9 +81,10 @@ client.post('url', body)
 client.put('url', body)
 ```
 
-### Encode request body to url encoded form on PUT method
+### Encode request body to url encoded form on POST, PUT method
 ```
 const body = { key: 'value' }
+client.postByUrlEncoding('url', body)
 client.putByUrlEncoding('url', body)
 ```
 
@@ -115,5 +116,4 @@ interface Error {
 
 ## To Do
 
-- Support various parameter encoding (form, url-encoded)
 - Abstract file upload and Support uploading progress
