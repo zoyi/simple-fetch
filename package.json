@@ -1,6 +1,6 @@
 {
   "name": "zoyi-simple-fetch",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "scripts": {
     "test": "mocha --opts tests/mocha.opts tests/**/*-test.ts",
     "build:ts": "rm -rf lib-ts && tsc -p . && rm -fr lib-ts/tests && mv lib-ts/src/** lib-ts/ && rm -fr lib-ts/src",
