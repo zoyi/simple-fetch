@@ -114,6 +114,15 @@ interface Error {
 }
 ```
 
+### Throw status code 0 if internet is disconnected (Actually, not reachable to server)
+```
+// Tested in Safari, Chrome, IE10, IE11, Edge
+{
+    status: 0,
+    statusText: 'TypeError ~~'
+}
+```
+
 ## To Do
 
 - Abstract file upload and Support uploading progress

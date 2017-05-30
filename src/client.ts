@@ -116,7 +116,9 @@ export default class Client {
             headers: this.getHeader(),
             credentials: this.credentials || undefined,
             ...options
-        }).then(Client.checkStatus)
+        })
+        .then(Client.checkStatus)
+        .catch(Client.checkDisconnected)
     }
 
     /**
@@ -141,6 +143,22 @@ export default class Client {
             }
             throw error
         })
+    }
+
+    /**
+     * Check internet disconnected.
+     * throw original response if response is json,
+     * throw disconnected error if response is string.
+     */
+    static checkDisconnected(response: any) {
+        if (!response.status && !response.statusText) {
+            throw {
+                status: 0,
+                statusText: response
+            }
+        } else {
+            throw response
+        }
     }
 
     // Private helper methods
