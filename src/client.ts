@@ -114,7 +114,7 @@ export default class Client {
     fetch(url: string, options?: Object) {
         return fetch(url, {
             headers: this.getHeader(),
-            credentials: this.credentials,
+            credentials: this.credentials || undefined,
             ...options
         }).then(Client.checkStatus)
     }
