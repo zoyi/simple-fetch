@@ -49,7 +49,7 @@ export default class Client {
 
     get(url: string, query?: Object) {
         if (query) {
-            return this.fetch(`${this.baseUrl}${url}?${Qs.stringify(query)}`)
+            return this.fetch(`${this.baseUrl}${url}?${Qs.stringify(query, { arrayFormat: 'repeat' })}`)
         }
         return this.fetch(`${this.baseUrl}${url}`)
     }
