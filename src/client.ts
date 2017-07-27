@@ -47,11 +47,17 @@ export default class Client {
 
     // REST methods
 
-    get(url: string, query?: Object) {
+    get(url: string, query?: Object, body?: Object) {
         if (query) {
-            return this.fetch(`${this.baseUrl}${url}?${Qs.stringify(query, { arrayFormat: 'repeat' })}`)
+            return this.fetch(`${this.baseUrl}${url}?${Qs.stringify(query, { arrayFormat: 'repeat' })}`, {
+                method: 'get',
+                body: JSON.stringify(body)
+            })
         }
-        return this.fetch(`${this.baseUrl}${url}`)
+        return this.fetch(`${this.baseUrl}${url}`, {
+            method: 'get',
+            body: JSON.stringify(body)
+        })
     }
 
     post(url: String, body?: Object) {
