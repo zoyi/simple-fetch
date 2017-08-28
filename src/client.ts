@@ -60,10 +60,10 @@ export default class Client {
         })
     }
 
-    post(url: String, body?: Object) {
+    post(url: String, body?: Object, encoder?: (body: any) => any) {
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'post',
-            body: JSON.stringify(body),
+            body: encoder ? encoder(body) : JSON.stringify(body),
         })
     }
 
