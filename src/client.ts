@@ -72,7 +72,9 @@ export default class Client {
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'post',
             body: body,
-            headers: this.headerInterceptor({})
+            headers: this.headerInterceptor({
+                'Accept': 'application/json'
+            })
         })
     }
 
@@ -96,7 +98,9 @@ export default class Client {
         return this.fetch(`${this.baseUrl}${url}`, {
             method: 'put',
             body: body,
-            headers: this.headerInterceptor({})
+            headers: this.headerInterceptor({
+                'Accept': 'application/json'
+            })
         })
     }
 
